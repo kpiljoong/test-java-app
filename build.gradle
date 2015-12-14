@@ -1,0 +1,56 @@
+apply plugin: 'java'
+apply plugin: 'application'
+apply plugin: 'war'
+apply plugin: 'eclipse'
+apply plugin: 'tomcat'
+
+defaultTasks 'build'
+
+buildscript {
+    repositories {
+        mavenCentral()
+    }
+
+    dependencies {
+        classpath 'org.gradle.api.plugins:gradle-tomcat-plugin:0.9.7'
+    }
+}
+
+repositories {
+  maven {
+    url = "http://download.java.net/maven/2/"
+    url "http://kenglxn.github.com/QRGen/repository"
+  }
+	mavenCentral()
+}
+
+sourceSets {
+	main {
+    	java {
+     		srcDirs 'src'
+    	}
+
+    	output.classesDir = 'webapp/WEB-INF/classes'
+    }
+}
+
+dependencies {
+	compile 'javax.servlet:javax.servlet-api:3.0.1'
+	compile 'org.apache.httpcomponents:httpclient:4.1.1'
+	compile 'org.apache.httpcomponents:httpcore:4.1'
+  compile 'net.glxn:qrgen:1.1'
+	providedRuntime 'javax.servlet:javax.servlet-api:3.0.1'
+  def tomcatVersion = '7.0.30'
+  tomcat "org.apache.tomcat.embed:tomcat-embed-core:${tomcatVersion}",
+         "org.apache.tomcat.embed:tomcat-embed-logging-juli:${tomcatVersion}"
+  tomcat("org.apache.tomcat.embed:tomcat-embed-jasper:${tomcatVersion}") {
+      exclude group: 'org.eclipse.jdt.core.compiler', module: 'ecj'
+  }
+}
+
+tomcatRun {
+  httpPort = 8090
+  reloadable = true
+  webAppSourceDirectory = file('webapp')
+  contextPath = 'testapp'
+}
