@@ -1,0 +1,19 @@
+version: 0.0
+os: linux
+files:
+    - source: app/ROOT.war
+      destination: /var/lib/tomcat7/webapps/
+hooks:
+    BeforeInstall:
+        - location: deploy/scripts/beforeInstall.sh
+          timeout: 30
+          runas: root
+    AfterInstall:
+        - location: deploy/scripts/afterInstall.sh
+          timeout: 30
+          runas: root
+    ValidateService:
+        - location: deploy/scripts/validateService.sh
+          timeout: 30
+          runas: root
+

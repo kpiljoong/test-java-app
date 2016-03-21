@@ -12,7 +12,7 @@
 
     <servlet>
         <servlet-name>HelloServlet</servlet-name>
-        <servlet-class>hello.HelloServlet</servlet-class>
+        <servlet-class>com.awsdemo.HelloServlet</servlet-class>
     </servlet>
 
     <servlet-mapping>
