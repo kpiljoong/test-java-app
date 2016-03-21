@@ -1,6 +1,6 @@
-Tomcat Gradle Hotswap Example
+Test Tomcat Web Application
 ===================
 
-gradle tomcatRun -> http://localhost:8090/testapp/
+gradle clean build
 
-gradle classes then refresh 
+./build.sh
