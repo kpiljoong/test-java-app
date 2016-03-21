@@ -1,1 +1,3 @@
+build/*
 .gradle/*
+pkg/app/ROOT.war
